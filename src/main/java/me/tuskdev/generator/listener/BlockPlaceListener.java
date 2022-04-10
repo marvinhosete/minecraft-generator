@@ -44,15 +44,8 @@ public class BlockPlaceListener implements Listener {
         int amount = Integer.parseInt(ItemNBT.get(itemStack, "amount"));
         int level = ItemNBT.has(itemStack, "level") ? Integer.parseInt(ItemNBT.get(itemStack, "level")) : 1;
 
-        Generator target = generatorCache.selectIf(coordinates -> location.distance(coordinates.build()) < 10);
-        if (target != null && target.getOwner().equals(owner) && target.getType().equals(simpleGenerator.getType()) && target.getLevel() == level) {
-            if (itemStack.getAmount() > 1) itemStack.setAmount(itemStack.getAmount() - 1);
-            else event.getPlayer().setItemInHand(new ItemStack(Material.AIR));
-
-            target.setAmount(target.getAmount() + amount);
-            generatorController.updateAmount(target.getAmount(), target.getCoordinates());
-            return;
-        } else if (target != null) {
+        Generator target = generatorCache.selectIf(coordinates -> location.distance(coordinates.build()) < 5);
+        if (target != null) {
             event.getPlayer().sendMessage("§cThere's a generator nearby, so you can't put another one here.");
             return;
         }

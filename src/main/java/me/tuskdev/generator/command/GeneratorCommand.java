@@ -1,8 +1,7 @@
 package me.tuskdev.generator.command;
 
+import me.saiintbrisson.bukkit.command.command.BukkitContext;
 import me.saiintbrisson.minecraft.command.annotation.Command;
-import me.saiintbrisson.minecraft.command.command.Context;
-import me.saiintbrisson.minecraft.command.target.CommandTarget;
 import me.tuskdev.generator.config.GeneratorManager;
 import me.tuskdev.generator.config.data.SimpleGenerator;
 import me.tuskdev.generator.util.ItemNBT;
@@ -22,10 +21,9 @@ public class GeneratorCommand {
 
     @Command(
             name = "generator",
-            permission = "cmd.generator",
-            target = CommandTarget.PLAYER
+            permission = "cmd.generator"
     )
-    public void handleCommand(Context<Player> context, String[] args) {
+    public void handleCommand(BukkitContext context, String[] args) {
         if (args.length <= 2) {
             context.sendMessage("§cUse: /generator <player> <type> <amount>.");
             return;
