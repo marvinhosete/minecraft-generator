@@ -36,9 +36,6 @@ public class BlockPlaceListener implements Listener {
         if (itemStack == null || !ItemNBT.has(itemStack, "type")) return;
         event.setCancelled(true);
 
-        if (itemStack.getAmount() > 1) itemStack.setAmount(itemStack.getAmount() - 1);
-        else event.getPlayer().setItemInHand(new ItemStack(Material.AIR));
-
         String type = ItemNBT.get(itemStack, "type");
         SimpleGenerator simpleGenerator = generatorManager.getGenerator(type);
 
@@ -48,12 +45,20 @@ public class BlockPlaceListener implements Listener {
         int level = ItemNBT.has(itemStack, "level") ? Integer.parseInt(ItemNBT.get(itemStack, "level")) : 1;
 
         Generator target = generatorCache.selectIf(coordinates -> location.distance(coordinates.build()) < 10);
-        if (target != null && target.getOwner().equals(owner) && target.getLevel() == level) {
+        if (target != null && target.getOwner().equals(owner) && target.getType().equals(simpleGenerator.getType()) && target.getLevel() == level) {
+            if (itemStack.getAmount() > 1) itemStack.setAmount(itemStack.getAmount() - 1);
+            else event.getPlayer().setItemInHand(new ItemStack(Material.AIR));
+
             target.setAmount(target.getAmount() + amount);
             generatorController.updateAmount(target.getAmount(), target.getCoordinates());
             return;
+        } else if (target != null) {
+            event.getPlayer().sendMessage("§cThere's a generator nearby, so you can't put another one here.");
+            return;
         }
 
+        if (itemStack.getAmount() > 1) itemStack.setAmount(itemStack.getAmount() - 1);
+        else event.getPlayer().setItemInHand(new ItemStack(Material.AIR));
         Generator generator = new Generator(owner, Coordinates.of(location), type);
         generator.setAmount(amount);
         generator.setLevel(level);

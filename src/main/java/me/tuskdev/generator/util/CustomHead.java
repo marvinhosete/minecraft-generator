@@ -26,7 +26,9 @@ public class CustomHead {
             profileField = skullMetaClass.getDeclaredField("profile");
             profileField.setAccessible(true);
             encoder = Base64.getEncoder();
-        } catch (Throwable ignored) {}
+        } catch (Throwable e) {
+            e.printStackTrace();
+        }
     }
 
     public static ItemStack skull(String url) {

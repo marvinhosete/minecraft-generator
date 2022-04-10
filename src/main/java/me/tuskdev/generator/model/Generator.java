@@ -86,8 +86,6 @@ public class Generator implements QueryAdapter {
         this.level = response.get("level");
         this.items = response.get("items");
         this.amount = response.get("amount");
-
-        System.out.println("A");
         return this;
     }
 }
