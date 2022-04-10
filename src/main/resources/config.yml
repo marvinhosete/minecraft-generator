@@ -1,0 +1,40 @@
+database:
+  host: 'localhost'
+  port: 3306
+  database: 'tuskdev'
+  username: 'root'
+  password: ''
+
+# This is the item given to the player when getting a generator.
+# Variables:
+# {type} - The generator type.
+# {amount} - Number of stacked generators.
+generator-item:
+  url: 'http://textures.minecraft.net/texture/cef6ce1a526517507703d7a2d52da3246d6f62057072b637142b4fd664c8704'
+  name: '&f&l<&b&l!&f&l> &nGENERATOR &f&l<&b&l!&f&l>'
+  lore:
+    - '&f&l&nWhy do you need generators?'
+    - '&7Generators are here to help you and your island'
+    - '&7Climb the podium when you are working or not even on!'
+    - '&7Generators give your island that extra boost to help'
+    - '&7Become the #1 Island on TheGalaxies Battlefront!'
+    - '&b&l&nTypes of Generators:'
+    - '&3| &f&l<&a&l!&f&l> &a&lGEM GENERATOR &f&l<&a&l!&f&l>'
+    - '&3| &f&l<&c&l!&f&l> &c&lMOBCOIN GENERATOR &f&l<&c&l!&f&l>'
+    - '&3| &f&l<&6&l!&f&l> &6&lSPAWNER GENERATOR &f&l<&6&l!&f&l>'
+    - '&3| &f&l<&e&l!&f&l> &eSoon &f&l<&e&l!&f&l>'
+    - '&3| §f§l<§b§l!§f§l> §d§lO§b§lR§d§lB §b§lG§d§lE§b§lN§d§lE§b§lR§d§lA§b§lT§d§lO§b§lR §f§l<§d§l!§f§l>'
+    - '&f&l&nHow to Get More:'
+    - '&7You can get more through.'
+    - '&7&l/&c&lM&7&li&c&ln&7&li&c&ln&7&lg &c&lP&7&la&c&ls&7&ls'
+    - '&b&l/Orb &d&lShop'
+
+# Here you can configure the list of available generators.
+generators:
+  generator-id:
+    type: 'spawner'
+    amount-items: 100
+    delay-items: 10
+    command-items: '/give {player} diamond {amount}'
+    value-upgrade: 100000
+    max-upgrade: 10

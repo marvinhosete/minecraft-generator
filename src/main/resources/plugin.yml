@@ -1,0 +1,4 @@
+name: minecraft-generator
+version: 1.0-SNAPSHOT
+main: me.tuskdev.generator.GeneratorPlugin
+depend: [HolographicDisplays, Vault]
