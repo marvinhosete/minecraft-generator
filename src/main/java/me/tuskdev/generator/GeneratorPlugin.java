@@ -1,12 +1,11 @@
 package me.tuskdev.generator;
 
-import com.gmail.filoghost.holographicdisplays.api.Hologram;
-import com.gmail.filoghost.holographicdisplays.api.HologramsAPI;
 import me.saiintbrisson.bukkit.command.BukkitFrame;
 import me.tuskdev.generator.cache.GeneratorCache;
 import me.tuskdev.generator.command.GeneratorCommand;
 import me.tuskdev.generator.config.GeneratorManager;
 import me.tuskdev.generator.controller.GeneratorController;
+import me.tuskdev.generator.hologram.HologramLibrary;
 import me.tuskdev.generator.inventory.ViewFrame;
 import me.tuskdev.generator.listener.BlockBreakListener;
 import me.tuskdev.generator.listener.BlockPlaceListener;
@@ -43,24 +42,24 @@ public class GeneratorPlugin extends JavaPlugin {
         GeneratorManager generatorManager = new GeneratorManager(getConfig().getConfigurationSection("generators"));
 
         BukkitFrame bukkitFrame = new BukkitFrame(this);
-        bukkitFrame.registerCommands(new GeneratorCommand(GENERATOR_ITEM, generatorManager));
+        bukkitFrame.registerCommands(new GeneratorCommand(GENERATOR_ITEM, generatorManager, getConfig().getConfigurationSection("messages.command")));
 
         ViewFrame viewFrame = new ViewFrame(this);
-        viewFrame.register(new GeneratorInventoryView(generatorCache, generatorController, generatorManager, GENERATOR_ITEM));
+        viewFrame.register(new GeneratorInventoryView(generatorCache, generatorController, generatorManager, GENERATOR_ITEM, getConfig().getConfigurationSection("messages.inventory"), getConfig().getConfigurationSection("inventory")));
 
         Bukkit.getPluginManager().registerEvents(new BlockBreakListener(generatorCache), this);
-        Bukkit.getPluginManager().registerEvents(new BlockPlaceListener(generatorCache, generatorController, generatorManager), this);
+        Bukkit.getPluginManager().registerEvents(new BlockPlaceListener(generatorCache, generatorController, generatorManager, getConfig().getString("messages.cant-place-generator", "&cAn error occurred while trying to send the message.")), this);
         Bukkit.getPluginManager().registerEvents(new PlayerInteractListener(generatorCache, viewFrame), this);
         Bukkit.getPluginManager().registerEvents(new WorldChunkListener(generatorCache, generatorController), this);
 
-        Bukkit.getScheduler().runTaskTimer(this, new GeneratorItemTask(generatorCache, generatorController, generatorManager), 0L, 20L);
+        Bukkit.getScheduler().runTaskTimer(this, new GeneratorItemTask(generatorCache, generatorManager), 0L, 20L);
 
         load(generatorCache, generatorController);
     }
 
     @Override
     public void onDisable() {
-        HologramsAPI.getHolograms(this).forEach(Hologram::delete);
+        HologramLibrary.clear();
         generatorCache.deleteAnd(generator -> generatorController.updateItems(generator.getItems(), generator.getCoordinates()));
     }
 

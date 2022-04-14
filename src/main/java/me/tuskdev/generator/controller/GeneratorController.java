@@ -13,7 +13,6 @@ public class GeneratorController {
 
     private static final String QUERY_CREATE_TABLE = "CREATE TABLE IF NOT EXISTS `generator` (`owner` CHAR(36) NOT NULL, `type` CHAR(16) NOT NULL, `level` INT NOT NULL, `items` INT DEFAULT 0, `amount` INT NOT NULL, `world_name` CHAR(16) NOT NULL, `block_x` INT NOT NULL, `block_y` INT NOT NULL, `block_z` INT NOT NULL, `chunk_x` INT NOT NULL, `chunk_z` INT NOT NULL);";
     private static final String QUERY_INSERT_GENERATOR = "INSERT INTO `generator`(`owner`, `type`, `level`, `amount`, `world_name`, `block_x`, `block_y`, `block_z`, `chunk_x`, `chunk_z`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
-    private static final String QUERY_UPDATE_AMOUNT = "UPDATE `generator` SET `amount` = ?  WHERE `world_name` = ? AND `block_x` = ? AND `block_y` = ? AND `block_z` = ?;";
     private static final String QUERY_UPDATE_ITEMS = "UPDATE `generator` SET `items` = ?  WHERE `world_name` = ? AND `block_x` = ? AND `block_y` = ? AND `block_z` = ?;";
     private static final String QUERY_UPDATE_LEVEL = "UPDATE `generator` SET `level` = ?  WHERE `world_name` = ? AND `block_x` = ? AND `block_y` = ? AND `block_z` = ?;";
     private static final String QUERY_SELECT_GENERATORS = "SELECT * FROM `generator` WHERE `world_name` = ? AND `chunk_x` = ? AND `chunk_z` = ?;";
@@ -52,10 +51,6 @@ public class GeneratorController {
 
     public Set<Generator> select(String worldName, int chunkX, int chunkZ) {
         return provider.selectAsync(QUERY_SELECT_GENERATORS, Generator.class, worldName, chunkX, chunkZ).join();
-    }
-
-    public void updateAmount(int amount, Coordinates coordinates) {
-        provider.executeUpdate(QUERY_UPDATE_AMOUNT, amount, coordinates.getWorldName(), coordinates.getX(), coordinates.getY(), coordinates.getZ());
     }
 
     public void updateItems(int items, Coordinates coordinates) {

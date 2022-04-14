@@ -310,8 +310,17 @@ public class ItemBuilder {
      */
     public static ItemStack load(ConfigurationSection configurationSection) {
         return (configurationSection.contains("url") ? new ItemBuilder(CustomHead.skull(configurationSection.getString("url"))) : new ItemBuilder(Material.getMaterial(configurationSection.getString("material", "stone").toUpperCase()), configurationSection.getInt("amount", 1), (byte) configurationSection.getInt("durability", 0)))
+                .setSkullOwner(configurationSection.getString("skullOwner", "Steve"))
                 .setName(ChatColor.translateAlternateColorCodes('&', configurationSection.getString("name", "")))
                 .setLore(StringUtil.translateAlternateColorCodes('&', configurationSection.getStringList("lore")))
+                .toItemStack();
+    }
+
+    public static ItemStack load(ConfigurationSection configurationSection, Map<String, Object> variables) {
+        return (configurationSection.contains("url") ? new ItemBuilder(CustomHead.skull(configurationSection.getString("url"))) : new ItemBuilder(Material.getMaterial(configurationSection.getString("material", "stone").toUpperCase()), configurationSection.getInt("amount", 1), (byte) configurationSection.getInt("durability", 0)))
+                .setSkullOwner(configurationSection.getString("skullOwner", "Steve").replace("{player}", variables.getOrDefault("player", "Steve").toString()))
+                .setName(ChatColor.translateAlternateColorCodes('&', configurationSection.getString("name", "").replace("{level}", variables.getOrDefault("level", 0).toString()).replace("{next-level}", variables.getOrDefault("next-level", 0).toString())))
+                .setLore(StringUtil.translateAlternateColorCodes('&', StringUtil.replace(configurationSection.getStringList("lore"), s -> s.replace("{level}", variables.getOrDefault("level", 0).toString()).replace("{next-level}", variables.getOrDefault("next-level", 0).toString()))))
                 .toItemStack();
     }
 }

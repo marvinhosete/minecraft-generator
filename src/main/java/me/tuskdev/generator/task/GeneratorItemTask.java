@@ -1,10 +1,10 @@
 package me.tuskdev.generator.task;
 
-import com.gmail.filoghost.holographicdisplays.api.Hologram;
 import me.tuskdev.generator.cache.GeneratorCache;
 import me.tuskdev.generator.config.GeneratorManager;
 import me.tuskdev.generator.config.data.SimpleGenerator;
 import me.tuskdev.generator.controller.GeneratorController;
+import me.tuskdev.generator.hologram.Hologram;
 import me.tuskdev.generator.model.Generator;
 import me.tuskdev.generator.util.GeneratorUtil;
 import me.tuskdev.generator.util.TimeUtil;
@@ -15,12 +15,10 @@ import java.util.concurrent.TimeUnit;
 public class GeneratorItemTask implements Runnable {
 
     private final GeneratorCache generatorCache;
-    private final GeneratorController generatorController;
     private final GeneratorManager generatorManager;
 
-    public GeneratorItemTask(GeneratorCache generatorCache, GeneratorController generatorController, GeneratorManager generatorManager) {
+    public GeneratorItemTask(GeneratorCache generatorCache, GeneratorManager generatorManager) {
         this.generatorCache = generatorCache;
-        this.generatorController = generatorController;
         this.generatorManager = generatorManager;
     }
 
@@ -37,8 +35,7 @@ public class GeneratorItemTask implements Runnable {
             }
 
             if (time > System.currentTimeMillis()) {
-                hologram.removeLine(3);
-                hologram.appendTextLine(String.format("§f§lNext Generation: §d§l%s", TimeUtil.format(time-System.currentTimeMillis())));
+                hologram.updateLine(1, String.format("§f§lNext Generation: §d§l%s", TimeUtil.format(time-System.currentTimeMillis())));
                 continue;
             }
 

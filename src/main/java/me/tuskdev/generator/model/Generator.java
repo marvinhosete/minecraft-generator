@@ -1,8 +1,8 @@
 package me.tuskdev.generator.model;
 
-import com.gmail.filoghost.holographicdisplays.api.Hologram;
 import io.github.sasuked.bukkitsql.query.QueryAdapter;
 import io.github.sasuked.bukkitsql.query.QueryResponse;
+import me.tuskdev.generator.hologram.Hologram;
 import me.tuskdev.generator.util.Coordinates;
 
 import java.util.UUID;

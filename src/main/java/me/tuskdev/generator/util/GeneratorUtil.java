@@ -1,14 +1,12 @@
 package me.tuskdev.generator.util;
 
-import com.gmail.filoghost.holographicdisplays.api.Hologram;
-import com.gmail.filoghost.holographicdisplays.api.HologramsAPI;
-import me.tuskdev.generator.GeneratorPlugin;
 import me.tuskdev.generator.config.data.SimpleGenerator;
+import me.tuskdev.generator.hologram.Hologram;
+import me.tuskdev.generator.hologram.HologramLibrary;
 import me.tuskdev.generator.model.Generator;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.concurrent.TimeUnit;
 
@@ -21,11 +19,13 @@ public class GeneratorUtil {
     }
 
     public static void hologram(Generator generator, SimpleGenerator simpleGenerator) {
-        Hologram hologram = HologramsAPI.createHologram(JavaPlugin.getPlugin(GeneratorPlugin.class), generator.getCoordinates().build().add(0.5, 2.4, 0.5));
-        hologram.appendTextLine(HOLOGRAM_TITLE.replace("{type}", simpleGenerator.getType().toUpperCase()).replace("{amount}", "" + generator.getAmount()));
-        hologram.appendTextLine("");
-        hologram.appendTextLine(String.format("§f§lTier: §b§l%s", generator.getLevel()));
-        hologram.appendTextLine(String.format("§f§lNext Generation: §d§l%s", TimeUtil.format(TimeUnit.MINUTES.toMillis(simpleGenerator.getItemsDelay()))));
+        Hologram hologram = HologramLibrary.createHologram(generator.getCoordinates().build().add(0.5, 0, 0.5),
+                String.format("§f§lNext Generation: §d§l%s", TimeUtil.format(TimeUnit.MINUTES.toMillis(simpleGenerator.getItemsDelay()))),
+                String.format("§f§lTier: §b§l%s", generator.getLevel()),
+                "",
+                HOLOGRAM_TITLE.replace("{type}", simpleGenerator.getType().toUpperCase()).replace("{amount}", "" + generator.getAmount())
+        );
+        hologram.spawn();
 
         generator.setHologram(hologram);
     }

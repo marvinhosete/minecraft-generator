@@ -1,4 +1,4 @@
 name: ManifestGenerator
 version: 1.0-SNAPSHOT
 main: me.tuskdev.generator.GeneratorPlugin
-depend: [HolographicDisplays, Vault]
+depend: [Vault]

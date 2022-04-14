@@ -6,6 +6,7 @@ database:
   password: ''
 
 # This is the item given to the player when getting a generator.
+
 # Variables:
 # {type} - The generator type.
 # {amount} - Number of stacked generators.
@@ -23,7 +24,7 @@ generator-item:
     - '&3| &f&l<&c&l!&f&l> &c&lMOBCOIN GENERATOR &f&l<&c&l!&f&l>'
     - '&3| &f&l<&6&l!&f&l> &6&lSPAWNER GENERATOR &f&l<&6&l!&f&l>'
     - '&3| &f&l<&e&l!&f&l> &eSoon &f&l<&e&l!&f&l>'
-    - '&3| §f§l<§b§l!§f§l> §d§lO§b§lR§d§lB §b§lG§d§lE§b§lN§d§lE§b§lR§d§lA§b§lT§d§lO§b§lR §f§l<§d§l!§f§l>'
+    - '&3| &f&l<&b&l!&f&l> &d&lO&b&lR&d&lB &b&lG&d&lE&b&lN&d&lE&b&lR&d&lA&b&lT&d&lO&b&lR &f&l<&d&l!&f&l>'
     - '&f&l&nHow to Get More:'
     - '&7You can get more through.'
     - '&7&l/&c&lM&7&li&c&ln&7&li&c&ln&7&lg &c&lP&7&la&c&ls&7&ls'
@@ -38,3 +39,66 @@ generators:
     command-items: '/give {player} diamond {amount}'
     value-upgrade: 100000
     max-upgrade: 10
+
+# Plugin messages
+messages:
+  command:
+    usage: '&cUse: /generator <player> <type> <amount>.'
+    player-not-found: '&cPlayer not found.'
+    generator-not-found: '&cThe selected generator does not exist.'
+    invalid-amount: '&cThe number you entered is invalid.'
+    success: '&eYay! The generator was successfully delivered to the player.'
+  inventory:
+    no-items: '&cThere are no items to collect.'
+    collection-success: '&eYou have removed {amount} items from your generator.'
+    remove-sucess: '&eYay! Your generator has been successfully removed.'
+    max-upgrade: '&cYour generator is already at maximum level.'
+    not-enough-money: '&cYou need more {value} to be able to evolve your generator.'
+    upgrade-success: '&eYay! Your generator has successfully leveled up.'
+  cant-place-generator: '&cTheres a generator nearby, so you cant put another one here.'
+
+# Generator Inventory
+inventory:
+  collection-item:
+    url: 'http://textures.minecraft.net/texture/37018eb436d9473499b68a7bdec42a23309890af97170007e4ae5f6e7af6a90f'
+    name: '&f&l<&b&l!&f&l> &b&l&nCOLLECTION&f&l <&b&l!&f&l>'
+    lore:
+      - '&7Click to collect your balance.'
+  remove-item:
+    material: BARRIER
+    name: '&f&l<&b&l!&f&l> &f&l&nREMOVE&b&l &nGENERATOR&f&l <&b&l!&f&l>'
+    lore:
+      - '&7Click to remove your generator.'
+      - '&7(You will receive all items generated)'
+  information-item:
+    url: 'http://textures.minecraft.net/texture/cef6ce1a526517507703d7a2d52da3246d6f62057072b637142b4fd664c8704'
+    name: '&f&l<&b&l!&f&l> &nGENERATOR&b&l &nINFORMATION&f&l <&b&l!&f&l>'
+    lore:
+      - '&f&l&nWhy do you need generators?'
+      - '&7Generators are here to help you and your island'
+      - '&7Climb the podium when you are working or not even on!'
+      - '&7Generators give your island that extra boost to help'
+      - '&7Become the #1 Island on TheGalaxies Battlefront!'
+      - '&b&l&nTypes of Generators:'
+      - '&3| &f&l<&a&l!&f&l> &a&lGEM GENERATOR &f&l<&a&l!&f&l>'
+      - '&3| &f&l<&c&l!&f&l> &c&lMOBCOIN GENERATOR &f&l<&c&l!&f&l>'
+      - '&3| &f&l<&6&l!&f&l> &6&lSPAWNER GENERATOR &f&l<&6&l!&f&l>'
+      - '&3| &f&l<&e&l!&f&l> &eSoon &f&l<&e&l!&f&l>'
+      - '&3| &f&l<&b&l!&f&l> &d&lO&b&lR&d&lB &b&lG&d&lE&b&lN&d&lE&b&lR&d&lA&b&lT&d&lO&b&lR &f&l<&d&l!&f&l>'
+      - '&f&l&nHow to Get More:'
+      - '&7You can get more through.'
+      - '&7&l/&c&lM&7&li&c&ln&7&li&c&ln&7&lg &c&lP&7&la&c&ls&7&ls'
+      - '&b&l/Orb &d&lShop'
+  viewer-item:
+    material: 'SKULL_ITEM'
+    durability: 3
+    skullOwner: '{player}'
+    name: '&f&l<&b&l!&f&l> &b&l&nUPGRADE&f&l <&b&l!&f&l>'
+    lore:
+      - '&bCurrent Tier: &f{level}'
+      - '&bNext Tier: &f{next-level}'
+      - ''
+      - '&bUpgrading your generator will'
+      - '&bIncrease the amount of'
+      - '&bGenerated Items you can get'
+      - ''

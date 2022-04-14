@@ -8,6 +8,7 @@ import me.tuskdev.generator.model.Generator;
 import me.tuskdev.generator.util.Coordinates;
 import me.tuskdev.generator.util.GeneratorUtil;
 import me.tuskdev.generator.util.ItemNBT;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
@@ -23,11 +24,13 @@ public class BlockPlaceListener implements Listener {
     private final GeneratorCache generatorCache;
     private final GeneratorController generatorController;
     private final GeneratorManager generatorManager;
+    private final String cantPlaceGenerator;
 
-    public BlockPlaceListener(GeneratorCache generatorCache, GeneratorController generatorController, GeneratorManager generatorManager) {
+    public BlockPlaceListener(GeneratorCache generatorCache, GeneratorController generatorController, GeneratorManager generatorManager, String cantPlaceGenerator) {
         this.generatorCache = generatorCache;
         this.generatorController = generatorController;
         this.generatorManager = generatorManager;
+        this.cantPlaceGenerator = ChatColor.translateAlternateColorCodes('&', cantPlaceGenerator);
     }
 
     @EventHandler
@@ -46,7 +49,7 @@ public class BlockPlaceListener implements Listener {
 
         Generator target = generatorCache.selectIf(coordinates -> location.distance(coordinates.build()) < 5);
         if (target != null) {
-            event.getPlayer().sendMessage("§cThere's a generator nearby, so you can't put another one here.");
+            event.getPlayer().sendMessage(cantPlaceGenerator);
             return;
         }
 
