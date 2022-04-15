@@ -3,6 +3,9 @@ package me.tuskdev.generator.listener;
 import me.tuskdev.generator.cache.GeneratorCache;
 import me.tuskdev.generator.model.Generator;
 import me.tuskdev.generator.util.Coordinates;
+import org.bukkit.Material;
+import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
@@ -21,6 +24,14 @@ public class BlockBreakListener implements Listener {
 
         if (generator != null) {
             event.setCancelled(true);
+            return;
+        }
+
+        if (event.getBlock().getType() != Material.SEA_LANTERN && event.getBlock().getType() != Material.QUARTZ_STAIRS) return;
+
+        Block block = event.getBlock().getRelative(BlockFace.UP);
+        if (block != null && block.getType() == Material.OBSIDIAN) {
+            event.setCancelled(generatorCache.select(Coordinates.of(block.getLocation())) != null);
             return;
         }
 
