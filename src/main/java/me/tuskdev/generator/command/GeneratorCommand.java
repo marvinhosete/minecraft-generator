@@ -21,9 +21,6 @@ public class GeneratorCommand {
         this.generatorItem = generatorItem;
         this.generatorManager = generatorManager;
         this.messages = messages;
-
-        System.out.println(messages);
-        messages.getKeys(true).forEach(System.out::println);
     }
 
     @Command(
