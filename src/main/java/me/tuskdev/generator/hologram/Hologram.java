@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.bukkit.Location;
 import com.google.common.collect.ImmutableList;
+import org.bukkit.entity.Entity;
 
 public class Hologram {
 
@@ -64,4 +65,5 @@ public class Hologram {
     public List<HologramLine> getLines() {
         return ImmutableList.copyOf(lines.values());
     }
+
 }

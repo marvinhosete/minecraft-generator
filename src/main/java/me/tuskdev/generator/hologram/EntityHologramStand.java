@@ -44,4 +44,8 @@ public class EntityHologramStand implements ArmorHologram {
         return line == null ? null : line.getHologram();
     }
 
+    @Override
+    public ArmorStand getArmorStand() {
+        return armorStand;
+    }
 }

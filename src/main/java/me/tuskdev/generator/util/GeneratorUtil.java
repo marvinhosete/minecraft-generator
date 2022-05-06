@@ -23,7 +23,7 @@ public class GeneratorUtil {
                 String.format("§f§lNext Generation: §d§l%s", TimeUtil.format(TimeUnit.MINUTES.toMillis(simpleGenerator.getItemsDelay()))),
                 String.format("§f§lTier: §b§l%s", generator.getLevel()),
                 "",
-                HOLOGRAM_TITLE.replace("{type}", simpleGenerator.getType().toUpperCase()).replace("{amount}", "" + generator.getAmount())
+                HOLOGRAM_TITLE.replace("{type}", simpleGenerator.getType().toUpperCase())
         );
         hologram.spawn();
 
@@ -32,7 +32,7 @@ public class GeneratorUtil {
 
     public static void buildStruct(Location location) {
         Block block = location.getBlock();
-        block.setType(Material.OBSIDIAN);
+        block.setType(Material.EMERALD_BLOCK);
 
         for (int i = 0; i < 3; i++) {
             for (int x = -1; x < 2; x++) {

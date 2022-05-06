@@ -6,10 +6,8 @@ database:
   password: ''
 
 # This is the item given to the player when getting a generator.
-
 # Variables:
 # {type} - The generator type.
-# {amount} - Number of stacked generators.
 generator-item:
   url: 'http://textures.minecraft.net/texture/cef6ce1a526517507703d7a2d52da3246d6f62057072b637142b4fd664c8704'
   name: '&f&l<&b&l!&f&l> &nGENERATOR &f&l<&b&l!&f&l>'

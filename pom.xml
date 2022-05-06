@@ -24,7 +24,7 @@
                 <configuration>
                     <jarname>ManifestGenerator</jarname>
                     <finalName>ManifestGenerator</finalName>
-                    <outputDirectory>D:\server - 1.8\plugins</outputDirectory>
+                    <outputDirectory>D:\server\plugins</outputDirectory>
                 </configuration>
             </plugin>
         </plugins>

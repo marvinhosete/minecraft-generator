@@ -51,7 +51,7 @@ public class GeneratorCommand {
             return;
         }
 
-        target.getInventory().addItem(ItemNBT.set(simpleGenerator.build(generatorItem.clone(), amount), "type", args[1].toUpperCase(), "amount", "" + amount));
+        target.getInventory().addItem(ItemNBT.set(simpleGenerator.build(generatorItem.clone(), amount), "type", args[1].toUpperCase()));
         context.sendMessage(message("success"));
     }
 

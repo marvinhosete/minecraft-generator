@@ -12,7 +12,7 @@ public class Generator implements QueryAdapter {
     private UUID owner;
     private Coordinates coordinates;
     private String type;
-    private int level = 1, items = 0, amount = 1;
+    private int level = 1, items = 0;
     private long time = System.currentTimeMillis();
 
     // HOLOGRAM
@@ -46,14 +46,6 @@ public class Generator implements QueryAdapter {
         this.items = items;
     }
 
-    public int getAmount() {
-        return amount;
-    }
-
-    public void setAmount(int amount) {
-        this.amount = amount;
-    }
-
     public Hologram getHologram() {
         return hologram;
     }
@@ -85,7 +77,6 @@ public class Generator implements QueryAdapter {
         this.type = response.get("type");
         this.level = response.get("level");
         this.items = response.get("items");
-        this.amount = response.get("amount");
         return this;
     }
 }

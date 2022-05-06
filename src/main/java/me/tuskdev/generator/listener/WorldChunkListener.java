@@ -2,6 +2,7 @@ package me.tuskdev.generator.listener;
 
 import me.tuskdev.generator.cache.GeneratorCache;
 import me.tuskdev.generator.controller.GeneratorController;
+import me.tuskdev.generator.hologram.HologramLibrary;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.world.ChunkLoadEvent;
@@ -24,6 +25,8 @@ public class WorldChunkListener implements Listener {
 
     @EventHandler
     public void onChunkUnload(ChunkUnloadEvent event) {
+        HologramLibrary.removeHolograms(event.getChunk());
+
         generatorCache.deleteIfAnd(coordinates -> coordinates.getX() >> 4 == event.getChunk().getX() && coordinates.getZ() >> 4 == event.getChunk().getZ(), generator -> generatorController.updateItems(generator.getItems(), generator.getCoordinates()));
     }
 

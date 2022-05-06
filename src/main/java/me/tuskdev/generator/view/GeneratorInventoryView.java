@@ -20,7 +20,6 @@ import org.bukkit.block.Block;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 
 public class GeneratorInventoryView extends View {
 
@@ -88,7 +87,7 @@ public class GeneratorInventoryView extends View {
         for (int x = -1; x < 2; x++) for (int z = -1; z < 2; z++) block.getRelative(x, -1, z).setType(Material.AIR);
 
         Bukkit.dispatchCommand(Bukkit.getConsoleSender(), generatorManager.getGenerator(generator.getType()).getItemsCommand().replace("{player}", player.getName()).replace("{amount}", "" + generator.getItems()));
-        player.getInventory().addItem(ItemNBT.set(generatorManager.getGenerator(generator.getType()).build(itemGenerator.clone(), generator.getAmount()), "type", generator.getType().toUpperCase(), "amount", "" + generator.getAmount(), "level", "" + generator.getLevel()));
+        player.getInventory().addItem(ItemNBT.set(generatorManager.getGenerator(generator.getType()).build(itemGenerator.clone(), 1), "type", generator.getType().toUpperCase(), "level", "" + generator.getLevel()));
         player.sendMessage(message("remove-success"));
     }
 

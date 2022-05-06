@@ -45,8 +45,9 @@ public class SimpleGenerator {
 
     public ItemStack build(ItemStack itemStack, int amount) {
         return new ItemBuilder(itemStack)
-                .setName(itemStack.getItemMeta().getDisplayName().replace("{type}", type.substring(0,1).toUpperCase() + type.substring(1).toLowerCase()).replace("{amount}", "" + amount))
-                .setLore(StringUtil.replace(itemStack.getItemMeta().getLore(), s -> s.replace("{type}", type.substring(0,1).toUpperCase() + type.substring(1).toLowerCase()).replace("{amount}", "" + amount)))
+                .setAmount(amount)
+                .setName(itemStack.getItemMeta().getDisplayName().replace("{type}", type.substring(0,1).toUpperCase() + type.substring(1).toLowerCase()))
+                .setLore(StringUtil.replace(itemStack.getItemMeta().getLore(), s -> s.replace("{type}", type.substring(0,1).toUpperCase() + type.substring(1).toLowerCase())))
                 .toItemStack();
     }
 }

@@ -1,5 +1,7 @@
 package me.tuskdev.generator.hologram;
 
+import org.bukkit.entity.ArmorStand;
+
 public interface ArmorHologram {
 
     void setText(String text);
@@ -9,5 +11,7 @@ public interface ArmorHologram {
     HologramLine getLine();
 
     Hologram getHologram();
+
+    ArmorStand getArmorStand();
 
 }

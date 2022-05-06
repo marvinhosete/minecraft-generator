@@ -44,7 +44,6 @@ public class BlockPlaceListener implements Listener {
 
         UUID owner = event.getPlayer().getUniqueId();
         Location location = event.getBlock().getLocation().add(0, 1, 0);
-        int amount = Integer.parseInt(ItemNBT.get(itemStack, "amount"));
         int level = ItemNBT.has(itemStack, "level") ? Integer.parseInt(ItemNBT.get(itemStack, "level")) : 1;
 
         Generator target = generatorCache.selectIf(coordinates -> location.distance(coordinates.build()) < 5);
@@ -56,7 +55,6 @@ public class BlockPlaceListener implements Listener {
         if (itemStack.getAmount() > 1) itemStack.setAmount(itemStack.getAmount() - 1);
         else event.getPlayer().setItemInHand(new ItemStack(Material.AIR));
         Generator generator = new Generator(owner, Coordinates.of(location), type);
-        generator.setAmount(amount);
         generator.setLevel(level);
         generator.setTime(System.currentTimeMillis() + TimeUnit.MINUTES.toMillis(simpleGenerator.getItemsDelay()));
 
